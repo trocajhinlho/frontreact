@@ -1,24 +1,82 @@
-#include "c2wasm.c"
 #include <stdio.h>
+#include "dependencies/c2wasm.c"
+#include "dependencies/react.c"
 
-long set_div_value() {
-  // Create an array to hold function arguments
-  c2wasm_js_var find_args = c2wasm_create_array();
-  c2wasm_append_array_string(find_args, "test_div");
-  
-  // Get the DOM element with id "test_div"
-  c2wasm_js_var element = c2wasm_call_object_prop(c2wasm_document, "getElementById", find_args);  
-  
-  // Set the innerHTML of the element
-  c2wasm_set_object_prop_string(element, "innerHTML", "Hello World from C");
-  
-  return c2wasm_undefined;
+// Handler for button clicks
+c2wasm_js_var handleClick(c2wasm_js_var args) {
+  c2wasm_call_object_prop(c2wasm_window, "alert", args);
+  return c2wasm_null;
+}
+
+// Create a simple component
+ReactComponent createAppComponent() {
+  return ReactCreateElement(
+    "div", 
+    ReactCreateProps(
+      "className", ReactCreateString("container"),
+      "style", ReactCreateProps(
+        "padding", ReactCreateString("20px"),
+        "maxWidth", ReactCreateString("800px"),
+        "margin", ReactCreateString("0 auto")
+      )
+    ),
+    // Header
+    ReactCreateElement("h1", 
+      ReactCreateProps(
+        "style", ReactCreateProps(
+          "color", ReactCreateString("#333"),
+          "borderBottom", ReactCreateString("2px solid #eee"),
+          "paddingBottom", ReactCreateString("10px")
+        )
+      ), 
+      ReactCreateString("Welcome to C-React")
+    ),
+    
+    // Content
+    ReactCreateFragment(
+      ReactCreateElement("p", ReactNULL, 
+        ReactCreateString("This page is rendered using React components written in C!")
+      ),
+      
+      ReactCreateElement("p", ReactNULL, 
+        ReactCreateString("WebAssembly enables C code to run directly in the browser with near-native performance.")
+      ),
+      
+      ReactCreateElement(
+        "button",
+        ReactCreateProps(
+          "onClick", ReactCreateClojure(
+            handleClick,
+            ReactCreateString("Hello from C-React!")
+          ),
+          "className", ReactCreateString("btn btn-primary"),
+          "style", ReactCreateProps(
+            "padding", ReactCreateString("10px 15px"),
+            "backgroundColor", ReactCreateString("#0d6efd"),
+            "color", ReactCreateString("white"),
+            "border", ReactCreateString("none"),
+            "borderRadius", ReactCreateString("4px"),
+            "cursor", ReactCreateString("pointer"),
+            "fontSize", ReactCreateString("16px"),
+            "marginTop", ReactCreateString("15px")
+          )
+        ),
+        ReactCreateString("Click Me")
+      )
+    )
+  );
 }
 
 int main() {
-  // Initialize C2Wasm
-  c2wasm_start();
+  // Initialize React
+  ReactStart();
   
-  // Expose the C function to JavaScript
-  c2wasm_set_object_prop_function(c2wasm_window, "set_div_value", set_div_value);
+  // Create our component
+  ReactComponent app = createAppComponent();
+  
+  // Mount to DOM
+  ReactRoot root = ReactDOMCreateRoot(ReactGetElementById("root"));
+  ReactRootRender(root, app);
+  
+  return 0;
 }
