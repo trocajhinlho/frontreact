@@ -6,7 +6,7 @@
 c2wasm_js_var create_style_a() {
     return ReactCreateProps(
         "style", ReactCreateProps(
-                "color", ReactCreateString("red")
+            "color", ReactCreateString("red")
         )
         );
 }
