@@ -17,5 +17,6 @@ void render_root(){
   if(strcmp(current_page,"login_form")== 0){
     app = create_login_form();
   }
+  first_render = false;
   ReactRootRender(root, app);
 }

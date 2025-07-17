@@ -1,8 +1,5 @@
 //silver_chain_scope_start
 //mannaged by silver chain: https://github.com/OUIsolutions/SilverChain
-#include "imports/imports.fdeclare.h"
+#include "../../../imports/imports.dep.h"
 //silver_chain_scope_end
-int numero = 0;
-ReactRoot root;
-char login_email[200];
-bool first_render = true;
+c2wasm_js_var handle_login_foccus_out(c2wasm_js_var args);
