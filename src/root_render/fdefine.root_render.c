@@ -4,6 +4,8 @@
 //silver_chain_scope_end
 
 void render_root(){
+  printf("render_root %d\n",total_renders);
+  total_renders++;
   char current_page[100] = {0};
   int size  = c2wasm_get_object_string_len_prop(c2wasm_window, "current_page");
   c2wams_object_memcpy_string(c2wasm_window,"current_page",0,current_page, size);

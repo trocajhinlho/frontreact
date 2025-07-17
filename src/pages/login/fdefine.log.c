@@ -24,7 +24,6 @@ ReactComponent create_login_form() {
         ReactNULL
     );
     ReactComponent error_input = ReactNULL;
-    printf("login email %s\n",login_email);
 
     if(strlen(login_email) < 10 && !first_render){
         error_input = ReactCreateElement(
