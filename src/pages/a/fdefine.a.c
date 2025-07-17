@@ -1,10 +1,8 @@
-#include "../../dependencies/c2wasm.c"
-#include "../../dependencies/react.c"
-#include "../redirects.c"
+//silver_chain_scope_start
+//mannaged by silver chain: https://github.com/OUIsolutions/SilverChain
+#include "../../imports/imports.globals.h"
+//silver_chain_scope_end
 
-void render_root();
-
-int numero = 0;
 c2wasm_js_var increementar(c2wasm_js_var args) {
     numero++;
     render_root();

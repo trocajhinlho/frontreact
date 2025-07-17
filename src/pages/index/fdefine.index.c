@@ -1,7 +1,8 @@
-#include <stdio.h>
-#include "../../dependencies/c2wasm.c"
-#include "../../dependencies/react.c"
-#include "../redirects.c"
+//silver_chain_scope_start
+//mannaged by silver chain: https://github.com/OUIsolutions/SilverChain
+#include "../../imports/imports.globals.h"
+//silver_chain_scope_end
+
 
 // Componente principal
 ReactComponent create_index_page() {
