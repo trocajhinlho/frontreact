@@ -2,13 +2,14 @@
 #include "dependencies/c2wasm.c"
 #include "dependencies/react.c"
 
-// Handler for button clicks
-c2wasm_js_var handleClick(c2wasm_js_var args) {
-  c2wasm_call_object_prop(c2wasm_window, "alert", args);
+// Handler para redirecionamento
+c2wasm_js_var handleRedirect(c2wasm_js_var args) {
+  // window.location = "other.html";
+  c2wasm_set_object_prop(c2wasm_window, "location", c2wasm_create_string("other.html"));
   return c2wasm_null;
 }
 
-// Create a simple component
+// Componente principal
 ReactComponent createAppComponent() {
   return ReactCreateElement(
     "div", 
@@ -20,7 +21,6 @@ ReactComponent createAppComponent() {
         "margin", ReactCreateString("0 auto")
       )
     ),
-    // Header
     ReactCreateElement("h1", 
       ReactCreateProps(
         "style", ReactCreateProps(
@@ -31,28 +31,21 @@ ReactComponent createAppComponent() {
       ), 
       ReactCreateString("Welcome to C-React")
     ),
-    
-    // Content
     ReactCreateFragment(
       ReactCreateElement("p", ReactNULL, 
-        ReactCreateString("This page is rendered using React components written in C!")
+        ReactCreateString("Esta página é renderizada usando React em C!")
       ),
-      
-      ReactCreateElement("p", ReactNULL, 
-        ReactCreateString("WebAssembly enables C code to run directly in the browser with near-native performance.")
-      ),
-      
       ReactCreateElement(
         "button",
         ReactCreateProps(
           "onClick", ReactCreateClojure(
-            handleClick,
-            ReactCreateString("Hello from C-React!")
+            handleRedirect,
+            ReactNULL
           ),
           "className", ReactCreateString("btn btn-primary"),
           "style", ReactCreateProps(
             "padding", ReactCreateString("10px 15px"),
-            "backgroundColor", ReactCreateString("#0d6efd"),
+            "backgroundColor", ReactCreateString("#c00"),
             "color", ReactCreateString("white"),
             "border", ReactCreateString("none"),
             "borderRadius", ReactCreateString("4px"),
@@ -61,22 +54,16 @@ ReactComponent createAppComponent() {
             "marginTop", ReactCreateString("15px")
           )
         ),
-        ReactCreateString("Click Me")
+        ReactCreateString("Ir para Página Vermelha")
       )
     )
   );
 }
 
 int main() {
-  // Initialize React
   ReactStart();
-  
-  // Create our component
   ReactComponent app = createAppComponent();
-  
-  // Mount to DOM
   ReactRoot root = ReactDOMCreateRoot(ReactGetElementById("root"));
   ReactRootRender(root, app);
-  
   return 0;
 }
