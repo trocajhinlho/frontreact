@@ -1,3 +1,6 @@
+
+#ifndef C_REACT 
+#define C_REACT
 /*
  $$$$$$\    $$$$$$$\                                  $$\     
 $$  __$$\   $$  __$$\                                 $$ |    
@@ -252,3 +255,5 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 
 */
+
+#endif 

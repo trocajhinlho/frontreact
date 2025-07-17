@@ -1,16 +1,10 @@
 #include <stdio.h>
-#include "dependencies/c2wasm.c"
-#include "dependencies/react.c"
-
-// Handler para redirecionamento
-c2wasm_js_var handleRedirect(c2wasm_js_var args) {
-  // window.location = "other.html";
-  c2wasm_set_object_prop(c2wasm_window, "location", c2wasm_create_string("other.html"));
-  return c2wasm_null;
-}
+#include "../../dependencies/c2wasm.c"
+#include "../../dependencies/react.c"
+#include "../redirects.c"
 
 // Componente principal
-ReactComponent createAppComponent() {
+ReactComponent create_index_page() {
   return ReactCreateElement(
     "div", 
     ReactCreateProps(
@@ -38,10 +32,8 @@ ReactComponent createAppComponent() {
       ReactCreateElement(
         "button",
         ReactCreateProps(
-          "onClick", ReactCreateClojure(
-            handleRedirect,
-            ReactNULL
-          ),
+        
+          "onClick", redirect_to_a,
           "className", ReactCreateString("btn btn-primary"),
           "style", ReactCreateProps(
             "padding", ReactCreateString("10px 15px"),
@@ -58,12 +50,4 @@ ReactComponent createAppComponent() {
       )
     )
   );
-}
-
-int main() {
-  ReactStart();
-  ReactComponent app = createAppComponent();
-  ReactRoot root = ReactDOMCreateRoot(ReactGetElementById("root"));
-  ReactRootRender(root, app);
-  return 0;
 }
