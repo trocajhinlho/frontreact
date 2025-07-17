@@ -11,6 +11,8 @@ ReactComponent create_login_form() {
         ReactCreateProps(
             "type", ReactCreateString("text"),
             "placeholder", ReactCreateString("Username"),
+            "id", ReactCreateString("username"),
+            "onBlur", ReactCreateClojure(handle_login_foccus_out),
             "name", ReactCreateString("username"),
             "style", ReactCreateProps(
                 "display", ReactCreateString("block"),
@@ -21,6 +23,20 @@ ReactComponent create_login_form() {
         ),
         ReactNULL
     );
+    ReactComponent error_input = ReactNULL;
+
+    if(strlen(login_email) < 10 && !first_render){
+        error_input = ReactCreateElement(
+            "div",
+            ReactCreateProps(
+                "style", ReactCreateProps(
+                    "color", ReactCreateString("red"),
+                    "marginBottom", ReactCreateString("10px")
+                )
+            ),
+            ReactCreateString("Email must be at least 5 characters long.")
+        );
+    }
 
     // Create password input
     ReactComponent password_input = ReactCreateElement(
@@ -70,6 +86,7 @@ ReactComponent create_login_form() {
             )
         ),
         username_input,
+        error_input,
         password_input,
         button
     );
