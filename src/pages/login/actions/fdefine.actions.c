@@ -5,5 +5,6 @@
 
 c2wasm_js_var handle_login_foccus_out(c2wasm_js_var args) {
     copy_js_input_to_c_string(login_email, "username");
+    render_root();
     return c2wasm_undefined;
 }
