@@ -3,11 +3,21 @@
 #include "../../dependencies/c2wasm.c"
 #include "../../dependencies/react.c"
 #include "../redirects.c"
+c2wasm_js_var create_style_a() {
+return ReactCreateProps(
+                "style", ReactCreateProps()
+                ),
+}
 
 ReactComponent create_page_a() {
     return ReactCreateElement(
             "div", 
             ReactNULL,
-            ReactCreateString("Entrou na págia a")
+            ReactCreateElement(
+                "h1", 
+                
+                ReactCreateString("#333")
+                
+            )
     );
 }
