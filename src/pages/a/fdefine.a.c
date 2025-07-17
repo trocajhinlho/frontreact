@@ -20,6 +20,7 @@ c2wasm_js_var create_style_do_numero() {
 c2wasm_js_var create_a_numero() {
     char numero_formatado [10] ={0};
     sprintf(numero_formatado, "%d", numero);
+    printf("%s\n", numero_formatado);
     return ReactCreateElement(
                 "h1", 
                 create_style_do_numero(),

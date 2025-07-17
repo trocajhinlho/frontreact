@@ -3,7 +3,6 @@
 #include "../imports/imports.globals.h"
 //silver_chain_scope_end
 
-
 void render_root(){
   char current_page[100] = {0};
   int size  = c2wasm_get_object_string_len_prop(c2wasm_window, "current_page");
@@ -14,6 +13,9 @@ void render_root(){
   } 
   if(strcmp(current_page,"a")== 0){
     app = create_page_a();
+  }
+  if(strcmp(current_page,"login_form")== 0){
+    app = create_login_form();
   }
   ReactRootRender(root, app);
 }
