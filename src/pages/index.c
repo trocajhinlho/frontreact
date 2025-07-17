@@ -33,7 +33,7 @@ ReactComponent create_index_page() {
         "button",
         ReactCreateProps(
         
-          "onClick", redirect_to_a,
+          "onClick", ReactCreateClojure(redirect_to_a),
           "className", ReactCreateString("btn btn-primary"),
           "style", ReactCreateProps(
             "padding", ReactCreateString("10px 15px"),

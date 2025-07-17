@@ -3,7 +3,7 @@
 #include "../dependencies/c2wasm.c"
 #include "../dependencies/react.c"
 #include "pages/index.c"
-
+#include "pages/a.c"
 
 int main() {
   ReactStart();
@@ -18,6 +18,7 @@ int main() {
     app = create_index_page();
   } 
   if(strcmp(current_page,"a")== 0){
+    app = create_page_a();
   }
 
 
