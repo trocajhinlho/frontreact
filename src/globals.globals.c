@@ -5,5 +5,6 @@
 int numero = 0;
 ReactRoot root;
 char login_email[200];
+char login_password[200];
 bool first_render = true;
 int total_renders = 0;

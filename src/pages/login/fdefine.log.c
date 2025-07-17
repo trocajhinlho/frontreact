@@ -24,6 +24,7 @@ ReactComponent create_login_form() {
         ReactNULL
     );
     ReactComponent error_input = ReactNULL;
+    ReactComponent error_password_input = ReactNULL;
 
     if(strlen(login_email) < 10 && !first_render){
         error_input = ReactCreateElement(
@@ -45,6 +46,8 @@ ReactComponent create_login_form() {
             "type", ReactCreateString("password"),
             "placeholder", ReactCreateString("Password"),
             "name", ReactCreateString("password"),
+            "onBlur", ReactCreateClojure(handle_password_foccus_out),
+            "id", ReactCreateString("PasswordSeiLa"),
             "style", ReactCreateProps(
                 "display", ReactCreateString("block"),
                 "marginBottom", ReactCreateString("10px"),
@@ -55,6 +58,19 @@ ReactComponent create_login_form() {
         ReactNULL
     );
 
+    if(strlen(login_password) < 10 && !first_render){
+        error_password_input = ReactCreateElement(
+            "div",
+            ReactCreateProps(
+                "style", ReactCreateProps(
+                    "color", ReactCreateString("red"),
+                    "marginBottom", ReactCreateString("10px")
+                )
+            ),
+            ReactCreateString("Email must be at least 5 characters long.")
+        );
+    }
+    
     // Create login button
     ReactComponent button = ReactCreateElement(
         "button",
@@ -88,6 +104,7 @@ ReactComponent create_login_form() {
         username_input,
         error_input,
         password_input,
+        error_password_input,
         button
     );
 }
