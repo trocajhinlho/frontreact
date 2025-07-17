@@ -513,7 +513,9 @@ EM_JS(void ,c2wasm_start, (void), {
         }
         //iterate over str_array and print each char 
 
-        return String.fromCharCode.apply(null, str_array);
+        let decoder = new TextDecoder('utf-8');
+        let uint8Array = new Uint8Array(str_array);
+        return decoder.decode(uint8Array);
     };
     
     window.c2wasm_get_stack_point = function(){
