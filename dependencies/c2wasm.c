@@ -877,8 +877,8 @@ c2wasm_js_var   c2wasm_create_function(c2wasm_js_var (*callback)()) {
 
 
 
-EMSCRIPTEN_KEEPALIVE int c2wasm_get_char(const char *str,int index) {
-    return str[index];
+EMSCRIPTEN_KEEPALIVE  unsigned char c2wasm_get_char(const char *str,int index) {
+    return (unsigned  char )str[index];
 }
 EMSCRIPTEN_KEEPALIVE int c2wasm_get_str_size(const char *str) {
     return strlen(str);
